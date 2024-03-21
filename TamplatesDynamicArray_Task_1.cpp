@@ -10,23 +10,18 @@
 #include "array_utils.h"
 using namespace std;
 
-// Заполнение массив
 template<typename T>
 void FillArray(T* arr, int size);
 
-// Печать массива
 template<typename T>
 void PrintArray(T* arr, int size);
 
-// Добавление элемента в конец массива
 template<typename T>
 T* AddNewItemToEnd(T* srcArr, int& size, T itemToAdd);
 
-// Вставка элемента по указанному индексу
 template<typename T>
 T* InsertElementToPointPosition(T* array, int& size, int index, const T element);
 
-// Удаление последнего элемента
 template<typename T>
 T* RemoveLastElement(T* array, int& size);
 
