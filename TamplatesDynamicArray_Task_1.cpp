@@ -34,6 +34,10 @@ T* AddNewItemToEnd(T* srcArr, int& size, T itemToAdd);
 template<typename T>
 T* InsertElementToPointPosition(T* array, int& size, int index, const T element);
 
+// Удаление последнего элемента
+template<typename T>
+T* RemoveLastElement(T* array, int& size);
+
 int main()
 {
 	SetConsoleCP(1251);
@@ -62,5 +66,8 @@ int main()
 	printf("%s \n\n", " -----------------------------------  Добавил указанный элемент на указанную позицию ----------------------------------- ");
 	PrintArray(ArrWithElementToPointPosition, sizeArray);
 
+	printf("%s \n\n", " -----------------------------------  Удаление последнего элемента из массива ----------------------------------- ");
+	int* removedLastElement =  RemoveLastElement(ArrWithElementToPointPosition, sizeArray);
+	PrintArray(removedLastElement, sizeArray);
 }
 

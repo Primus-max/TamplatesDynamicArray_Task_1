@@ -113,24 +113,35 @@ T* InsertElementToPointPosition(T* array, int& size, int index, const T element)
 	T* newArray = AllocateMemory<T>(size + 1);
 	if (newArray == nullptr)
 		return nullptr;
-
 	
 	for (int i = 0; i < index; ++i)
 		newArray[i] = array[i];
-
 	
 	newArray[index] = element;
-
 	
 	for (int i = index + 1; i < size + 1; ++i)
 		newArray[i] = array[i - 1];
-
 	
 	++size;
-
 	ClearMemory(array);
 	return newArray;
 }
 
+template<typename T>
+T* RemoveLastElement(T* array, int& size) {
+	if (array == nullptr || size <= 0)
+		return nullptr;
+		
+	T* newArray = AllocateMemory<T>(size - 1);
+	if (newArray == nullptr)
+		return nullptr;
+		
+	for (int i = 0; i < size - 1; ++i)
+		newArray[i] = array[i];
+		
+	--size;	
+	ClearMemory(array);
+	return newArray;
+}
 
 #endif
