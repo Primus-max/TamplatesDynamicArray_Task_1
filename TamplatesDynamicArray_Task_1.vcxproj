@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="TamplatesDynamicArray_Task_1.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="array_utils.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
