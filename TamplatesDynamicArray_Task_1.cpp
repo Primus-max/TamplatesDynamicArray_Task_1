@@ -26,18 +26,30 @@ T* AllocateMemory(T size);
 template<typename T>
 void ClearMemory(T* ptr);
 
+// Добавление элемента в конец массива
+template<typename T>
+T* AddNewItemToEnd(T* srcArr, int& size, T itemToAdd);
+
+
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
 	printf("%s", "Задать размер массива : ");
-	int sizeSrcArray = 0;
-	cin >> sizeSrcArray;
-	int* SrcArray = new int[sizeSrcArray];
-	FillArray(SrcArray, sizeSrcArray);
+	int initSize = 0;
+	int& sizeArray = initSize;
+	cin >> sizeArray;
+	int* SrcArray = new int[sizeArray];
+	FillArray(SrcArray, sizeArray);
 	printf("%s \n\n", " -----------------------------------  Заполненный массив ----------------------------------- ");
-	PrintArray(SrcArray, sizeSrcArray);
-}
+	PrintArray(SrcArray, sizeArray);
 
+	printf("%s", "Работаем с массивом целочисленных значений, какой элемент добавить в конец? : ");
+	int itemToAdd = 0;
+	cin >>  itemToAdd;
+	int* ArrWithAddedItemToEnd = AddNewItemToEnd(SrcArray, sizeArray, itemToAdd);
+	printf("%s \n\n", " -----------------------------------  Добавил элемент в конец массива ----------------------------------- ");
+	PrintArray(ArrWithAddedItemToEnd, sizeArray);
+}
 
