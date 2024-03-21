@@ -12,6 +12,7 @@ using namespace std;
 /// <param name="size">- размер массива</param>
 template<typename T>
 void FillArray(T* arr, int size) {
+	if (arr == nullptr) return;
 	random_device random;
 	for (int i = 0; i < size; i++)
 		arr[i] = static_cast<T>(random() % (100 + 50) - 50);
@@ -25,28 +26,12 @@ void FillArray(T* arr, int size) {
 /// <param name="size">- размер массива</param>
 template<typename T>
 void PrintArray(T* arr, int size) {
+	if (arr == nullptr) return;
 	for (int* i = arr; i < arr + size; i++)
 		cout << "[ " << *i << "] " << " ";
 
 	cout << endl;
 }
-
-/// <summary>
-/// Функция расчёта размера(новой памяти)
-/// </summary>
-/// <typeparam name="T">- пользовательский тип</typeparam>
-/// <param name="arr">- массив из которого считать</param>
-/// <param name="size">- размер</param>
-/// <returns>новы размер</returns>
-//template <typename T>
-//int CalcNewMemory(T* arr, int size) {
-//	int count = 0;
-//	for (int i = 0; i < size; ++i) {
-//		if (IsPrime(arr[i]))
-//			++count;
-//	}
-//	return count;
-//}
 
 /// <summary>
 /// Функция выделения новой памяти для массива
@@ -56,6 +41,7 @@ void PrintArray(T* arr, int size) {
 /// <returns>указатель на массив</returns>
 template<typename T>
 T* AllocateMemory(int size) {
+	if (size <= 0) size = 0;
 	T* newArray = new T[size];
 	return newArray;
 }
@@ -67,6 +53,7 @@ T* AllocateMemory(int size) {
 /// <param name="ptr">- указатель</param>
 template<typename T>
 void ClearMemory(T* ptr) {
+	if (ptr == nullptr) return;
 	delete ptr;
 }
 
@@ -127,6 +114,13 @@ T* InsertElementToPointPosition(T* array, int& size, int index, const T element)
 	return newArray;
 }
 
+/// <summary>
+/// Функция удаления последнего элемента из массива
+/// </summary>
+/// <typeparam name="T">пользовательский тип</typeparam>
+/// <param name="array">- исходный массив</param>
+/// <param name="size">- размер</param>
+/// <returns>указатель на новый массив</returns>
 template<typename T>
 T* RemoveLastElement(T* array, int& size) {
 	if (array == nullptr || size <= 0)
@@ -144,6 +138,14 @@ T* RemoveLastElement(T* array, int& size) {
 	return newArray;
 }
 
+/// <summary>
+/// Функция удаления элемента по указанной позиции
+/// </summary>
+/// <typeparam name="T">пользовательский тип</typeparam>
+/// <param name="array">- исходный массив</param>
+/// <param name="size">- размер</param>
+/// <param name="index">указатель на новый массив</param>
+/// <returns></returns>
 template<typename T>
 T* RemoveElementFromPosition(T* array, int& size, int index) {
 	if (array == nullptr || index < 0 || index >= size)
@@ -164,5 +166,54 @@ T* RemoveElementFromPosition(T* array, int& size, int index) {
 	return newArray;
 }
 
+/// <summary>
+/// Функция удаления дубликатов из массив
+/// </summary>
+/// <typeparam name="T">пользовательский тип</typeparam>
+/// <param name="array">- исходный массив</param>
+/// <param name="size">- размер</param>
+/// <returns>указатель на новый массив</returns>
+template<typename T>
+T* RemoveDuplicates(T* array, int& size) {
+	if (array == nullptr || size <= 1)
+		return nullptr;
+
+	int uniqueCount = 0;
+
+	for (int i = 0; i < size; ++i) {
+		bool isUnique = true;
+		for (int j = 0; j < i; ++j) {
+			if (array[i] == array[j]) {
+				isUnique = false;
+				break;
+			}
+		}
+		if (isUnique)
+			++uniqueCount;
+	}
+
+	T* newArray = AllocateMemory<T>(uniqueCount);
+	if (newArray == nullptr)
+		return nullptr;
+
+	int index = 0;
+
+	for (int i = 0; i < size; ++i) {
+		bool isUnique = true;
+		for (int j = 0; j < i; ++j) {
+			if (array[i] == array[j]) {
+				isUnique = false;
+				break;
+			}
+		}
+		if (isUnique)
+			newArray[index++] = array[i];
+	}
+
+	size = uniqueCount;
+	ClearMemory(array);
+
+	return newArray;
+}
 
 #endif

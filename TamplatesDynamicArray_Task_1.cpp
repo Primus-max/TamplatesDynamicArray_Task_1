@@ -1,8 +1,10 @@
-﻿// Написать шаблонные функции которые :
+﻿// 1.Написать шаблонные функции которые :
 // - добавляют новый элемент в конец массива
 // - добавляют новый элемент в указанную позицию массива
 // - удаляют последний элемент массива
 // - удаляют элемент из указанной позиции массива.
+// 2.Написать шаблонную функцию, которая удаляет все
+// повторяющиеся элементы массива(должен получится массив из уникальных элементов)
 
 #include <iostream>
 #include <random>
@@ -27,6 +29,9 @@ T* RemoveLastElement(T* array, int& size);
 
 template<typename T>
 T* RemoveElementFromPosition(T* array, int& size, int index);
+
+template<typename T>
+T* RemoveDuplicates(T* array, int& size);
 
 int main()
 {
@@ -56,7 +61,7 @@ int main()
 	printf("%s \n\n", " -----------------------------------  Добавил указанный элемент на указанную позицию ----------------------------------- ");
 	PrintArray(ArrWithElementToPointPosition, sizeArray);
 
-	printf("%s \n\n", " -----------------------------------  Удаление последнего элемента из массива ----------------------------------- ");
+	printf("%s \n\n", " -----------------------------------  Удалил последний элемент из массива ----------------------------------- ");
 	int* RemovedLastElement =  RemoveLastElement(ArrWithElementToPointPosition, sizeArray);
 	PrintArray(RemovedLastElement, sizeArray);
 
@@ -66,5 +71,10 @@ int main()
 	int* RemovedElementByPosition = RemoveElementFromPosition(RemovedLastElement, sizeArray, position);
 	printf("%s \n\n", " -----------------------------------  Удалил элемент на указанной позиции ----------------------------------- ");
 	PrintArray(RemovedElementByPosition, sizeArray);
+
+
+	printf("%s \n\n", " -----------------------------------  Удалил все дубликаты в массиве ----------------------------------- ");
+	int* RemovedDuplicates =  RemoveDuplicates(RemovedElementByPosition, sizeArray);
+	PrintArray(RemovedDuplicates, sizeArray);
 }
 
