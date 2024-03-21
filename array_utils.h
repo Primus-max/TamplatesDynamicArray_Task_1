@@ -144,4 +144,25 @@ T* RemoveLastElement(T* array, int& size) {
 	return newArray;
 }
 
+template<typename T>
+T* RemoveElementFromPosition(T* array, int& size, int index) {
+	if (array == nullptr || index < 0 || index >= size)
+		return nullptr;
+
+	T* newArray = AllocateMemory<T>(size - 1);
+	if (newArray == nullptr)
+		return nullptr;
+
+	for (int i = 0; i < index; ++i)
+		newArray[i] = array[i];
+
+	for (int i = index + 1; i < size; ++i)
+		newArray[i - 1] = array[i];
+
+	--size;
+	ClearMemory(array);
+	return newArray;
+}
+
+
 #endif
