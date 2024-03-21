@@ -19,9 +19,12 @@ template<typename T>
 void PrintArray(T* arr, int size);
 
 // Динамическое выделение памяти для массива
-// Возвращает указатель на новый массив
 template<typename T>
 T* AllocateMemory(T size);
+
+// Очистка памяти
+template<typename T>
+void ClearMemory(T* ptr);
 
 int main()
 {
@@ -38,8 +41,3 @@ int main()
 }
 
 
-template<typename T>
-T* AllocateMemory(T size) {
-	T* newArray = new int[size];
-	return newArray;
-}
