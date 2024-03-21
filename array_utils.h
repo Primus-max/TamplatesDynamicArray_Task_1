@@ -12,9 +12,9 @@ using namespace std;
 /// <param name="size">- размер массива</param>
 template<typename T>
 void FillArray(T* arr, int size) {
-    std::random_device random;
-    for (int i = 0; i < size; i++)
-        arr[i] = static_cast<T>(random() % (100 + 50) - 50);
+	random_device random;
+	for (int i = 0; i < size; i++)
+		arr[i] = static_cast<T>(random() % (100 + 50) - 50);
 }
 
 /// <summary>
@@ -55,8 +55,8 @@ void PrintArray(T* arr, int size) {
 /// <param name="size">- новый размер</param>
 /// <returns>указатель на массив</returns>
 template<typename T>
-T* AllocateMemory(T size) {
-	T* newArray = new int[size];
+T* AllocateMemory(int size) {
+	T* newArray = new T[size];
 	return newArray;
 }
 
@@ -83,7 +83,7 @@ T* AddNewItemToEnd(T* srcArr, int& size, T itemToAdd) {
 	if (srcArr == nullptr || size <= 0)
 		return nullptr;
 
-	T* newArr = new T[size + 1];
+	T* newArr =   AllocateMemory<T>(size + 1);
 	if (newArr == nullptr)
 		return nullptr;
 
@@ -96,6 +96,41 @@ T* AddNewItemToEnd(T* srcArr, int& size, T itemToAdd) {
 	return newArr;
 }
 
+/// <summary>
+/// ‘ункци€ вставки нового элемента на указанную позицию
+/// </summary>
+/// <typeparam name="T">пользовательский тип</typeparam>
+/// <param name="array">- исходный массив</param>
+/// <param name="size">- исходный размер</param>
+/// <param name="index">- индекс дл€ вставки элемента</param>
+/// <param name="element">- элемент дл€ вставки</param>
+/// <returns>указатель на новый массив</returns>
+template<typename T>
+T* InsertElementToPointPosition(T* array, int& size, int index, const T element) {
+	if (array == nullptr || index < 0 || index > size)
+		return nullptr;
+		
+	T* newArray = AllocateMemory<T>(size + 1);
+	if (newArray == nullptr)
+		return nullptr;
+
+	
+	for (int i = 0; i < index; ++i)
+		newArray[i] = array[i];
+
+	
+	newArray[index] = element;
+
+	
+	for (int i = index + 1; i < size + 1; ++i)
+		newArray[i] = array[i - 1];
+
+	
+	++size;
+
+	ClearMemory(array);
+	return newArray;
+}
 
 
 #endif

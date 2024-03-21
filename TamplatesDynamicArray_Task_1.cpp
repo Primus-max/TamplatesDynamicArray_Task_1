@@ -30,6 +30,9 @@ void ClearMemory(T* ptr);
 template<typename T>
 T* AddNewItemToEnd(T* srcArr, int& size, T itemToAdd);
 
+// Вставка элемента по указанному индексу
+template<typename T>
+T* InsertElementToPointPosition(T* array, int& size, int index, const T element);
 
 int main()
 {
@@ -51,5 +54,13 @@ int main()
 	int* ArrWithAddedItemToEnd = AddNewItemToEnd(SrcArray, sizeArray, itemToAdd);
 	printf("%s \n\n", " -----------------------------------  Добавил элемент в конец массива ----------------------------------- ");
 	PrintArray(ArrWithAddedItemToEnd, sizeArray);
+
+	printf("%s %i %s", "Работаем с массивом целочисленных значений, какой элемент добавить и на какую позицию из : ", sizeArray, " элементов ?");
+	int item = 0, position = 0;
+	cin >> item >> position;
+	int* ArrWithElementToPointPosition = InsertElementToPointPosition(ArrWithAddedItemToEnd, sizeArray, position, item);
+	printf("%s \n\n", " -----------------------------------  Добавил указанный элемент на указанную позицию ----------------------------------- ");
+	PrintArray(ArrWithElementToPointPosition, sizeArray);
+
 }
 
